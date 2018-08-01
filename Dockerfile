@@ -7,8 +7,10 @@ RUN  npm run build
 
 FROM  maven:alpine as BUILD
 WORKDIR /usr/src/app
+COPY pom.xml .
+RUN  mvn dependency:tree
 COPY . .
-COPY --from=NODE /usr/src/app/dist/ appfront/dist
+COPY --from=NODE /usr/src/app/dist/ src/main/resources/public/
 RUN mvn clean package -nsu -Dmaven.test.skip=true
 
 
