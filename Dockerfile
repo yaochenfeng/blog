@@ -7,8 +7,6 @@ RUN  npm run build
 
 FROM  maven:alpine as BUILD
 WORKDIR /usr/src/app
-COPY pom.xml .
-RUN  mvn dependency:tree
 COPY . .
 COPY --from=NODE /usr/src/app/dist/ src/main/resources/public/
 RUN mvn clean package -nsu -Dmaven.test.skip=true
@@ -21,6 +19,7 @@ RUN echo http://mirrors.aliyun.com/alpine/v3.6/main > /etc/apk/repositories;\
     apk --update add --no-cache tzdata
 ENV TZ=Asia/Shanghai \
     JAVA_OPTS="" \
+    HEALTH_URL="http://localhost:$APP_PORT/actuator/health" \
     SPRING_PROFILES_ACTIVE="prod" \
     APP_PORT=8080 \
     SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}'
@@ -30,4 +29,4 @@ EXPOSE $APP_PORT
 
 ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
 
-#HEALTHCHECK --interval=10s CMD curl -f http://localhost:$APP_PORT/health || exit 1
+HEALTHCHECK --interval=10s CMD curl -f $HEALTH_URL || exit 1
