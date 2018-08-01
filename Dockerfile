@@ -16,7 +16,7 @@ FROM java:8-jre-alpine
 
 #add timezone and default it to Shanghai
 RUN echo http://mirrors.aliyun.com/alpine/v3.6/main > /etc/apk/repositories;\
-    apk --update add --no-cache tzdata
+    apk --update add --no-cache tzdata curl
 ENV TZ=Asia/Shanghai \
     JAVA_OPTS="" \
     HEALTH_URL="http://localhost:$APP_PORT/actuator/health" \
