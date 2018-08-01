@@ -1,7 +1,7 @@
 FROM  node:alpine as NODE
 WORKDIR /usr/src/app
 COPY appfront/package.json .
-RUN npm install &&
+RUN npm install
 COPY appfront .
 RUN  npm run build
 
