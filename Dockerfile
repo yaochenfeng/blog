@@ -19,10 +19,10 @@ RUN echo http://mirrors.aliyun.com/alpine/v3.6/main > /etc/apk/repositories;\
     apk --update add --no-cache tzdata curl
 ENV TZ=Asia/Shanghai \
     JAVA_OPTS="" \
-    HEALTH_URL="http://localhost:$APP_PORT/actuator/health" \
     SPRING_PROFILES_ACTIVE="prod" \
     APP_PORT=8080 \
-    SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}'
+    SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}' \
+    HEALTH_URL="localhost:8080/actuator/health" \
 VOLUME /tmp
 COPY --from=BUILD /usr/src/app/target/*.jar app.jar
 EXPOSE $APP_PORT
