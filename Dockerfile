@@ -22,8 +22,8 @@ ENV TZ=Asia/Shanghai \
     SPRING_PROFILES_ACTIVE="prod" \
     APP_PORT=8080 \
     SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}' \
-    HEALTH_URL="localhost:8080/actuator/health" \
-VOLUME /tmp
+    HEALTH_URL="localhost:8080/actuator/health"
+
 COPY --from=BUILD /usr/src/app/target/*.jar app.jar
 EXPOSE $APP_PORT
 
