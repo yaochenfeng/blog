@@ -1,10 +1,10 @@
-package cn.bestws.core.util;
-import cn.bestws.core.result.Result;
+package cn.bestws.app.base.util;
+import cn.bestws.app.base.response.Result;
 
 public class ResultUtil {
     public static Result success(Object object) {
         Result result = new Result();
-        result.setCode(0);
+        result.setCode(200);
         result.setSuccess(true);
         result.setData(object);
         return result;

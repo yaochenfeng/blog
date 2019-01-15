@@ -1,4 +1,4 @@
-package cn.bestws.core.result;
+package cn.bestws.app.base.response;
 
 import lombok.Data;
 
