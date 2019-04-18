@@ -1,7 +1,7 @@
 FROM  node:alpine as NODE
 WORKDIR /usr/src/app
-RUN git clone https://github.com/yaochenfeng/weblog.git /usr/src/app \
-    npm install & npm run build
+RUN git clone https://github.com/yaochenfeng/weblog.git /usr/src/app &&\
+    npm install && npm run build
 
 FROM  gradle:alpine as BUILD
 WORKDIR /usr/src/app
