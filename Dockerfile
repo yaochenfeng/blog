@@ -1,7 +1,7 @@
-FROM  maven:alpine as BUILD
+FROM  gradle:alpine as BUILD
 WORKDIR /usr/src/app
 COPY . .
-RUN mvn clean package -nsu -Dmaven.test.skip=true
+RUN gradle bootJar
 
 
 FROM java:8-jre-alpine
@@ -16,7 +16,7 @@ ENV TZ=Asia/Shanghai \
     SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}' \
     HEALTH_URL="localhost:8080/actuator/health"
 
-COPY --from=BUILD /usr/src/app/target/*.jar app.jar
+COPY --from=BUILD /usr/src/app/build/libs/*.jar app.jar
 EXPOSE $APP_PORT
 
 ENTRYPOINT exec java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar
