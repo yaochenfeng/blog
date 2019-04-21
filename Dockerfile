@@ -7,7 +7,7 @@ FROM  openjdk:8 as BUILD
 WORKDIR /usr/src/app
 COPY . .
 COPY --from=NODE /usr/src/app/dist/ src/main/resources/public/
-RUN ./gradlew bootJar --debug
+RUN ./gradlew bootJar
 
 FROM java:8-jre-alpine
 
@@ -18,7 +18,7 @@ ENV TZ=Asia/Shanghai \
     JAVA_OPTS="" \
     SPRING_PROFILES_ACTIVE="prod" \
     APP_PORT=8080 \
-    SPRING_APPLICATION_JSON='{"server.port":$APP_PORT}' \
+    SPRING_APPLICATION_JSON='{"server.port":"$APP_PORT"}' \
     HEALTH_URL="localhost:8080/actuator/health"
 
 COPY --from=BUILD /usr/src/app/build/libs/*.jar app.jar
