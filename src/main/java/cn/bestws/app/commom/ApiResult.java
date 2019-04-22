@@ -1,4 +1,4 @@
-package cn.bestws.app.blog.commom;
+package cn.bestws.app.commom;
 
 import lombok.Data;
 

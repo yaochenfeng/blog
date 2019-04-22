@@ -1,4 +1,4 @@
-package cn.bestws.app.blog.entity;
+package cn.bestws.app.commom.entity;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package cn.bestws.app.blog;
+package cn.bestws.app;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

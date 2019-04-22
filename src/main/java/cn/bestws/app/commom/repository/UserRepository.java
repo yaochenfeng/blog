@@ -1,6 +1,6 @@
-package cn.bestws.app.blog.repository;
+package cn.bestws.app.commom.repository;
 
-import cn.bestws.app.blog.entity.User;
+import cn.bestws.app.commom.entity.User;
 import io.swagger.annotations.Api;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
