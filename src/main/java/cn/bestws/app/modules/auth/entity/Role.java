@@ -1,4 +1,4 @@
-package cn.bestws.app.commom.entity;
+package cn.bestws.app.modules.auth.entity;
 
 import lombok.Data;
 
@@ -9,11 +9,9 @@ import javax.persistence.*;
 @Table(name = "auth_role")
 public class Role {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private Long id;
-    @Column(length = 32)
+    @Column(length = 25)
     private String name;
-    @Column(length = 32)
-    private String desc;
-
 }

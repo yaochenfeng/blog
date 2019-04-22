@@ -1,6 +1,6 @@
-package cn.bestws.app.commom.repository;
+package cn.bestws.app.modules.auth.repository;
 
-import cn.bestws.app.commom.entity.User;
+import cn.bestws.app.modules.auth.entity.User;
 import io.swagger.annotations.Api;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RestResource;
@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @RestResource(path = "users")
 public interface UserRepository extends JpaRepository<User,Long> {
+    User findByUsername(String username);
 }
