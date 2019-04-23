@@ -30,3 +30,4 @@ application-dev.properties
 ### VS Code ###
 .vscode/
 src/main/resources/public
+db.mv.db
