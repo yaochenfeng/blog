@@ -7,39 +7,66 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.annotation.PostConstruct;
 
-@EnableWebSecurity
+//@EnableWebSecurity
 @Configuration
 @Slf4j
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+//        注册intercept url规则权限匹配信息
+        /*options请求 全部不拦截*/
+        http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/actuator/**").hasAuthority("ADMIN")
-                .antMatchers(
-                        "/",
-                        "/v2/api-docs",
-                        "/swagger-resources/**",
-                        "/swagger-ui.html**",
-                        "/webjars/**",
-                        "favicon.ico"
-                ).permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
+                .antMatchers("/")
                 .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .anyRequest().authenticated()
+                .and().formLogin().permitAll()
+                .and().logout().permitAll();
+//        http.exceptionHandling().accessDeniedHandler(accessDeniedHandler).and()
+//        http.csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers(
+//                        "/",
+//                        "/v2/api-docs",
+//                        "/swagger-resources/**",
+//                        "/swagger-ui.html**",
+//                        "/webjars/**",
+//                        "favicon.ico",
+//                        "/actuator/**"
+//                ).permitAll()
+//                .anyRequest().authenticated()
+//                .and()
+//                .formLogin()
+//                .permitAll()
+//                .and()
+//                .logout()
+//                .permitAll();
+    }
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        super.configure(web);
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/swagger-resources/configuration/ui",
+                "/swagger-resources",
+                "/swagger-resources/configuration/security",
+                "/swagger-ui.html",
+                "/css/**",
+                "/js/**",
+                "/img/**"
+        );
     }
 
     @Override
