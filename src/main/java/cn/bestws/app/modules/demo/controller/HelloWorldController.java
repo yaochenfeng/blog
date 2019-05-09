@@ -1,4 +1,4 @@
-package cn.bestws.app.blog.controller;
+package cn.bestws.app.modules.demo.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
