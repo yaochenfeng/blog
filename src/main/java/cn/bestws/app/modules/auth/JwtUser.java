@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Date;
 
 public class JwtUser implements UserDetails {
-    private final String id;
+    private final Long id;
     private final String username;
     private final String password;
     private final String email;
@@ -16,7 +16,7 @@ public class JwtUser implements UserDetails {
     private final Date lastPasswordResetDate;
 
     public JwtUser(
-            String id,
+            Long id,
             String username,
             String password,
             String email,
@@ -36,7 +36,7 @@ public class JwtUser implements UserDetails {
     }
 
     @JsonIgnore
-    public String getId() {
+    public Long getId() {
         return id;
     }
 

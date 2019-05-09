@@ -29,3 +29,4 @@ application-dev.properties
 
 ### VS Code ###
 .vscode/
+db.mv.db
