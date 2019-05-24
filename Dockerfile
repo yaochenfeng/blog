@@ -1,4 +1,4 @@
-FROM  node:alpine as NODE
+FROM  node as NODE
 WORKDIR /usr/src/app
 RUN git clone https://github.com/yaochenfeng/weblog.git /usr/src/app &&\
     npm install && npm run build
