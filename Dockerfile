@@ -3,11 +3,11 @@ WORKDIR /usr/src/app
 RUN git clone https://github.com/yaochenfeng/weblog.git /usr/src/app &&\
     npm install && npm run build
 
-FROM  gradle:alpine as BUILD
+FROM  openjdk:8 as BUILD
 WORKDIR /usr/src/app
 COPY . .
 COPY --from=NODE /usr/src/app/dist/ src/main/resources/public/
-RUN gradle bootJar
+RUN ./gradlew bootJar
 
 FROM java:8-jre-alpine
 
